@@ -1,10 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 *{
   margin: 0;
+}
+section{
+  width: 12px;
+  height: 12px;
+  /* background-color: black; */
+  border: 1px solid red;
 }
 /* :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
