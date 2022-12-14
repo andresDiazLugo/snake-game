@@ -1,11 +1,16 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import { render } from 'react-dom';
 import {AiOutlineArrowUp,AiOutlineArrowRight,AiOutlineArrowLeft,AiOutlineArrowDown} from 'react-icons/ai' 
 import SonidoTecla from '../../assets/boton.mp3'
 import ScreenInit from '../ScreenInit/ScreenInit';
 export default function NintendoConsole() {
+    // const [perilla, setPerilla] = useState<boolean>(false)
+    // const lives:number[] = [1,2,3]
+    // const snake =[55,54,53]
+    // const [arraySnakeSquares, setArraySnake] = useState()
     const [renderInitGame, setRenderInitGame] = useState<boolean>(false)
     const [renderGame, setRenderGame] = useState<boolean>(false)
+    const [direction, setDirection] = useState<number>(1)
     const sound = new Audio(SonidoTecla);
     const start = ()=>{
         if(renderInitGame){
@@ -13,6 +18,42 @@ export default function NintendoConsole() {
             setRenderGame(true)
         }
     }
+//     const paintSnake = ()=>{
+//         if(arraySnakeSquares){
+//             snake?.forEach(e=>arraySnakeSquares[e].classList.add('snake'))
+//         }
+//     }
+//  const moveSnake = ()=>{
+//      paintSnake()
+//         if(arraySnakeSquares){
+//             console.log({arraySnakeSquares})
+//             const tail:number = snake.pop() as number
+//             arraySnakeSquares[tail].classList.remove('snake')
+//             snake.unshift(snake[0]+direction)
+//         //revisar esta funcion
+//             arraySnakeSquares[snake[0]].classList.add('snake')
+//         }
+//     }
+    const directionSnake = (e:any)=>{
+            if(e.target.name === "Right" ){
+                setDirection(1)
+            }else if(e.target.name === "Up" ){
+                setDirection(-13)
+            }else if(e.target.name === "Left" ) {
+                setDirection(-1)
+            }else if(e.target.name === "Down"){
+                setDirection(13)
+            }
+    }
+
+// const prueba = ()=>{
+//     setPerilla(!perilla)
+// }
+
+// useEffect(()=>{
+//     const arraySnake:NodeListOf<Element> = document.querySelectorAll("#grid section")
+//     setArraySnake(arraySnake)
+// },[perilla])
   return (
     <div className='bg-slate-300  w-screen  sm:w-2/4 h-screen rounded-xl sm:m-auto' style={{borderBottomRightRadius:"6rem"}}>
         <div className=' h-6 m-auto w-2/3 border-b-2   border-b-slate-200 '></div>
@@ -22,7 +63,7 @@ export default function NintendoConsole() {
                     <h1  className='bg-black text-lime-500 text-center'>snake Game 2.0</h1>            
                 </div>
             :
-             <ScreenInit renderGame={renderGame} setRenderGame={setRenderGame}/> 
+             <ScreenInit  direction={direction} renderGame={renderGame} setRenderGame={setRenderGame}/> 
             }
         </div>
         <div className='w-5/6 m-auto pt-4'>
@@ -30,10 +71,10 @@ export default function NintendoConsole() {
         </div>
         <div className=' flex justify-between items-center mt-4'>
             <div className=' relative ml-4 w-40 h-40  rounded-full'>
-                <button  className=' absolute right-14 top-0  bg-black w-11 h-14 flex items-center justify-center rounded-t-2xl'><AiOutlineArrowUp color='white'/></button>
-                <button  className=' absolute right-2 bottom-14 rotate-90  bg-black w-11 h-14 flex items-center justify-center rounded-t-2xl'><AiOutlineArrowUp color='white'/></button>
-                <button  className=' absolute left-3 bottom-14 -rotate-90  bg-black w-11 h-14 flex items-center justify-center rounded-t-2xl'><AiOutlineArrowUp color='white'/></button>
-                <button  className=' absolute right-14 bottom-2 rotate-180  bg-black w-11 h-14 flex items-center justify-center rounded-t-2xl'><AiOutlineArrowUp color='white'/></button>                
+                <button id="sss"  onClick={(e)=>directionSnake(e)} name="Up" className=' absolute right-14 top-0  bg-black w-11 h-14 flex items-center justify-center rounded-t-2xl'>.<AiOutlineArrowUp color='white'/>.</button>
+                <button  onClick={directionSnake} name="Right" className=' absolute right-2 bottom-14 rotate-90  bg-black w-11 h-14 flex items-center justify-center rounded-t-2xl'>.<AiOutlineArrowUp color='white'/>.</button>
+                <button  onClick={directionSnake} name="Left" className=' absolute left-3 bottom-14 -rotate-90  bg-black w-11 h-14 flex items-center justify-center rounded-t-2xl'>.<AiOutlineArrowUp color='white'/>.</button>
+                <button  onClick={directionSnake} name="Down" className=' absolute right-14 bottom-2 rotate-180  bg-black w-11 h-14 flex items-center justify-center rounded-t-2xl'>.<AiOutlineArrowUp color='white'/>.</button>                
             </div>
             <div className='mr-2 w-36 h-20 bg-slate-200 origin-center -rotate-45 rounded-full  flex items-center justify-evenly'>
                 <button className=' bg-red-900 w-14 h-14 border-2 border-gray-900 rounded-full font-bold text-white'>B</button>

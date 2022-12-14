@@ -1,7 +1,7 @@
 import sonidoIntro from '../../assets/sonidoIntro.mp3'
 import {prop} from '../../types/types'
 import GameSnake from '../GameSnake/GameSnake'
-export default function ScreenInit({renderGame,setRenderGame}:prop) {
+export default function ScreenInit({renderGame,setRenderGame, direction,moveSnake,prueba}:prop ) {
     if(!renderGame){
         return (    
             <div  className='bg-lime-500 w-60 h-60 sm:w-64 sm:h-64 mx-auto my-auto mb-7 flex flex-col items-center justify-center gap-3'>
@@ -17,7 +17,7 @@ export default function ScreenInit({renderGame,setRenderGame}:prop) {
           )
     }
     return(
-        <GameSnake/>
+        <GameSnake prueba={prueba} moveSnake={moveSnake} direction={direction}/>
     )
 
 }
